@@ -1,21 +1,18 @@
 package jr.acens.api.domain.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import jr.acens.api.domain.user.DTO.UserDTO;
 import jr.acens.api.domain.user.DTO.UserForgotDTO;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Table(name = "users")
@@ -29,6 +26,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     private String login;
     private String password;
