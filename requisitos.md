@@ -4,16 +4,20 @@ REGRAS DE NEGÓCIO:
 - TODA OPERAÇÃO NO BANCO DE DADOS DEVE LEVAR O USERID QUE FEZ AQUILO
 
 **DONE**
+
 CREATE USER - OK!
 SISTEMA DE LOGIN - OK!
 SISTEMA DE AUTENTICAÇÃO POR JWT - OK!
 SISTEMA RECUPERAÇÃO DE SENHA - OK!
 
-*TO BE DONE*
+**TO BE DONE**
+
 USER
-I.
+I. validar:
 - confirmar o que deve ser restrito ao admin
+
 II. to do:
+- alterar sistema de reset password {token ficará em cache, de alguma forma será armazenado para fazer a requisição}
 - UPDATE USER {confirmar dados que possam ser alterados}
 - DELETE USER - [rota exclusiva adm]
 - LIST USER {
@@ -24,9 +28,11 @@ II. to do:
 - rotas para adm, primeiro cria manualmente e com o acesso adm, ele cria novos adm
 
 CRIAR TABLE SAÍDAS *(CONFIRMAR CAMPOS GASTO)*
+
 I. validar:
 - campos gasto 
 - roll taxativo de gastos fixos
+
 II. to do:
 - enum com tipoDeGasto {fixos {roll taxativo, OUTROS_GASTOS}}
 - SOFT DELETE
@@ -35,9 +41,11 @@ II. to do:
 - LISTAGEM DE SAIDAS {list by date, e padrão por última inclusão no DB }
 
 CRIAR TABLE ENTRADAS *(CONFIRMAR CAMPOS ENTRADA)*
+
 I. validar:
 - confirmar se precisa de enum com vendas recorrentes {produtos/serviços "padrões"}
 - {valor, data, fonte de entrada}
+
 II. to do:
 - tem que conferir a fonte de entrada, e realizar  cálculo de "valor" seguindo a regra de negócio
 - SOFT DELETE
@@ -46,6 +54,7 @@ II. to do:
 - LISTAGEM DE ENTRADAS {list by date, e padrão por última inclusão no DB }
 
 CRIAR TABLE SALDO
+
 I. to do:
 - vai tomar o acumulado quando fechar o caixa e salvar cada dia.
 - pode no dia iniciar negativo se user tomar dinheiro antes, mas nunca afeta o registro
@@ -55,8 +64,10 @@ I. to do:
 - LIST SALDO - list by date, e padrão por última inclusão no DB
 
 RELATÓRIOS ESPECÍFICOS ADMINISTRAÇÃO
+
 I. validar:
 - AGUARDANDO ADM SOLUÇÕES retornar especificidade dos relatórios
+
 II. to do:
 - rotas com a regra de negócio já estabelecida no backend
 - exportar relatórios será uma query ao banco de dados com os parametros recebidos e: SUM / GROUP BY
