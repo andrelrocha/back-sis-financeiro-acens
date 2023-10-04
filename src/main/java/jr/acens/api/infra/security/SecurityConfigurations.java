@@ -26,7 +26,9 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/users/admin/**").hasRole("ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/users/**").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN");
                     //CONFIRMAR ROTAS PROTEGIDAS PARA ADM
                     req.anyRequest().authenticated();
                 })
