@@ -7,6 +7,7 @@ import jr.acens.api.domain.user.DTO.UserLoginDTO;
 import jr.acens.api.domain.user.DTO.UserResetPassDTO;
 import jr.acens.api.domain.user.DTO.UserReturnLoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -49,6 +50,13 @@ public class UserController {
         var newUser = userService.createUser(data);
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.id()).toUri();
         return ResponseEntity.created(uri).body(newUser);
+    }
+
+    @PostMapping("/admin/create")
+    @Transactional
+    public ResponseEntity createAdmin(@RequestBody @Valid UserDTO data) {
+        var newAdmin = userService.createAdmin(data);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newAdmin);
     }
 
     @DeleteMapping("/{id}")

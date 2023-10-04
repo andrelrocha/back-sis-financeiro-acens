@@ -9,6 +9,9 @@ CREATE USER - OK!
 SISTEMA DE LOGIN - OK!
 SISTEMA DE AUTENTICAÇÃO POR JWT - OK!
 SISTEMA RECUPERAÇÃO DE SENHA - OK!
+DELETE USER - OK!
+CREATE ADM - OK!
+PROTEGER ROTA DE CRIAÇÃO DE ADM E DELETE USER - OK!
 
 **TO BE DONE**
 
@@ -19,13 +22,10 @@ I. validar:
 II. to do:
 *confirmar e informar à auto tech*
 - alterar sistema de reset password {token ficará em cache, de alguma forma será armazenado para fazer a requisição}
-- DELETE USER - [rota exclusiva adm]
 - LIST USER {
 - pageable padrão por nome
 - byId
   }
-- CRIAR ADM {
-- rotas para adm, primeiro cria manualmente e com o acesso adm, ele cria novos adm
 
 CRIAR TABLE SAÍDAS *(CONFIRMAR CAMPOS GASTO)*
 
