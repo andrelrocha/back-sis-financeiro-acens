@@ -8,10 +8,7 @@ import jr.acens.api.domain.user.DTO.UserResetPassDTO;
 import jr.acens.api.domain.user.DTO.UserReturnLoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import jr.acens.api.infra.security.TokenJwtDto;
 import jr.acens.api.service.UserService;
@@ -30,14 +27,6 @@ public class UserController {
         return ResponseEntity.ok(tokenJwt);
     }
 
-    @PostMapping("/create")
-    @Transactional
-    public ResponseEntity createUser(@RequestBody @Valid UserDTO data, UriComponentsBuilder uriBuilder) {
-        var newUser = userService.createUser(data);
-        var uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.id()).toUri();
-        return ResponseEntity.created(uri).body(newUser);
-    }
-
     @PostMapping("/forgot_password")
     @Transactional
     public ResponseEntity forgotPassword(@RequestBody UserReturnLoginDTO data) {
@@ -50,6 +39,23 @@ public class UserController {
     public ResponseEntity resetPassword(@RequestBody UserResetPassDTO data) {
         var stringSuccess= userService.resetPassword(data);
         return ResponseEntity.ok(stringSuccess);
+    }
+
+
+
+    @PostMapping("/create")
+    @Transactional
+    public ResponseEntity createUser(@RequestBody @Valid UserDTO data, UriComponentsBuilder uriBuilder) {
+        var newUser = userService.createUser(data);
+        var uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.id()).toUri();
+        return ResponseEntity.created(uri).body(newUser);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

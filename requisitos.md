@@ -17,8 +17,8 @@ I. validar:
 - confirmar o que deve ser restrito ao admin
 
 II. to do:
+*confirmar e informar à auto tech*
 - alterar sistema de reset password {token ficará em cache, de alguma forma será armazenado para fazer a requisição}
-- UPDATE USER {confirmar dados que possam ser alterados}
 - DELETE USER - [rota exclusiva adm]
 - LIST USER {
 - pageable padrão por nome

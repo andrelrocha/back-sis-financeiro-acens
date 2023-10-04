@@ -27,10 +27,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/users/**").permitAll();
-                    //deve-se criar manualmente no DB o registro de login do arildo
-                    //req.requestMatchers(HttpMethod.DELETE, "/doencas").hasRole("ADMIN");
-                    //req.requestMatchers(HttpMethod.POST, "/doencas").hasRole("ADMIN");
-                    //req.requestMatchers(HttpMethod.PUT, "/doencas").hasRole("ADMIN");
+                    //CONFIRMAR ROTAS PROTEGIDAS PARA ADM
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilterApplication, UsernamePasswordAuthenticationFilter.class)

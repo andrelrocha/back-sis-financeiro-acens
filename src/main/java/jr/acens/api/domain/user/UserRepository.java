@@ -13,4 +13,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByLoginToHandle(String login);
 
     boolean existsByLogin(String login);
+
+    @Query("""
+            SELECT u FROM User u WHERE u.id = :id
+            """)
+    User findByIdToHandle(Long id);
 }
