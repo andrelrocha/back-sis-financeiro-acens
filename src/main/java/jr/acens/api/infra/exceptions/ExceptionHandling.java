@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,11 +20,6 @@ public class ExceptionHandling {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity handleEntityNotFoundException() {
         return ResponseEntity.notFound().build();
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity handleIllegalArgumentException(IllegalArgumentException ex) {
-        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -44,12 +40,17 @@ public class ExceptionHandling {
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity handleAuthenticationException() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro no processo de autorização do usuário");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Erro no processo de autorização do usuário.");
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity handleAccessDeniedException() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado.");
+    }
+
+    @ExceptionHandler(InternalAuthenticationServiceException.class)
+    public ResponseEntity handleInternalAuthenticationServiceException(InternalAuthenticationServiceException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Erro no processo de autorização do usuário.\nSenha e/ou login errados.");
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -67,6 +68,11 @@ public class ExceptionHandling {
             this(error.getField(), error.getDefaultMessage());
         }
 
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
