@@ -43,6 +43,11 @@ public class UserController {
     }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity listUserById(@PathVariable Long id) {
+        var user = userService.listUserById(id);
+        return ResponseEntity.ok(user);
+    }
 
     @PostMapping("/create")
     @Transactional

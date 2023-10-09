@@ -12,6 +12,7 @@ public interface UserService {
     //CRUD
     UserReturnDTO createUser(UserDTO data);
     void deleteUser(Long id);
+    UserReturnDTO listUserById(Long id);
 
 
     //ADMIN
