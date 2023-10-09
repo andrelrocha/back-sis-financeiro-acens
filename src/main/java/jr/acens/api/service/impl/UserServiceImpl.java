@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import jr.acens.api.domain.user.DTO.*;
 import jr.acens.api.domain.user.UseCase.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import jr.acens.api.infra.security.TokenJwtDto;
 import jr.acens.api.service.UserService;
@@ -19,7 +21,8 @@ public class UserServiceImpl implements UserService {
     private DeleteUserUseCase deleteUserUseCase;
     @Autowired
     private ListUserByIdUseCase listUserByIdUseCase;
-
+    @Autowired
+    private ListAllUserUseCase listAllUserUseCase;
 
     @Autowired
     private ForgotPasswordUseCase forgotPasswordUseCase;
@@ -61,6 +64,12 @@ public class UserServiceImpl implements UserService {
     public UserReturnDTO listUserById(Long id) {
         var user = listUserByIdUseCase.listUserById(id);
         return user;
+    }
+
+    @Override
+    public Page<UserReturnDTO> listAllUsers(Pageable pageable) {
+        var page = listAllUserUseCase.listAllUsers(pageable);
+        return page;
     }
 
     @Override

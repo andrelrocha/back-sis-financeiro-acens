@@ -2,6 +2,8 @@ package jr.acens.api.service;
 
 import jr.acens.api.domain.user.DTO.*;
 import jr.acens.api.infra.security.TokenJwtDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserService {
     //SISTEMA DE LOGIN
@@ -13,6 +15,7 @@ public interface UserService {
     UserReturnDTO createUser(UserDTO data);
     void deleteUser(Long id);
     UserReturnDTO listUserById(Long id);
+    Page<UserReturnDTO> listAllUsers(Pageable pageable);
 
 
     //ADMIN
