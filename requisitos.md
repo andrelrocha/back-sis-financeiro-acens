@@ -12,20 +12,21 @@ SISTEMA RECUPERAÇÃO DE SENHA - OK!
 DELETE USER - OK!
 CREATE ADM - OK!
 PROTEGER ROTA DE CRIAÇÃO DE ADM E DELETE USER - OK!
+LIST USER BY ID - OK!
+LIST ALL USERS - OK!
 
 **TO BE DONE**
 
 USER
 I. validar:
 - confirmar o que deve ser restrito ao admin
-
 II. to do:
 *confirmar e informar à auto tech*
-- alterar sistema de reset password {token ficará em cache, de alguma forma será armazenado para fazer a requisição}
-- LIST USER {
-- pageable padrão por nome
-- byId
-  }
+- confirmar sistema de reset password {token ficará em cache, de alguma forma será armazenado para fazer a requisição}
+
+
+
+
 
 CRIAR TABLE SAÍDAS *(CONFIRMAR CAMPOS GASTO)*
 

@@ -1,6 +1,7 @@
 package jr.acens.api.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -51,6 +52,11 @@ public class ExceptionHandling {
     @ExceptionHandler(InternalAuthenticationServiceException.class)
     public ResponseEntity handleInternalAuthenticationServiceException(InternalAuthenticationServiceException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Erro no processo de autorização do usuário.\nSenha e/ou login errados.");
+    }
+
+    @ExceptionHandler(PropertyReferenceException.class)
+    public ResponseEntity handlePropertyReferenceException(PropertyReferenceException ex) {
+        return ResponseEntity.badRequest().body("Erro de consulta: " + ex.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
